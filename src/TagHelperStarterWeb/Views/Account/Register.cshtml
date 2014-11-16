@@ -1,0 +1,44 @@
+﻿@model TagHelperStarterWeb.Models.RegisterViewModel
+
+@{
+    ViewBag.Title = "Register";
+}
+
+<h2>@ViewBag.Title.</h2>
+
+<form controller="Account" action="Register" method="post" class="form-horizontal" role="form">
+    <h4>Create a new account.</h4>
+    <hr />
+    <div validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group">
+        <label for="UserName" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input for="UserName" class="form-control" />
+            <span validation-for="UserName" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="Password" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input for="Password" class="form-control" />
+            <span validation-for="Password" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="ConfirmPassword" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input for="ConfirmPassword" class="form-control" />
+            <span validation-for="ConfirmPassword" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" value="Register" />
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    <script src="~/lib/jquery-validation/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+}

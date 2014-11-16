@@ -1,0 +1,52 @@
+﻿@model TagHelperStarterWeb.Models.LoginViewModel
+
+@{
+    ViewBag.Title = "Log in";
+}
+
+<h2>@ViewBag.Title.</h2>
+<div class="row">
+    <div class="col-md-8">
+        <section id="loginForm">
+            <form controller="Account" action="Login" route-returnurl="@ViewBag.ReturnUrl" method="post" class="form-horizontal" role="form">
+                <h4>Use a local account to log in.</h4>
+                <hr />
+                <div validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label for="UserName" class="col-md-2 control-label"></label>
+                    <div class="col-md-10">
+                        <input for="UserName" class="form-control" />
+                        <span validation-for="UserName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="Password" class="col-md-2 control-label"></label>
+                    <div class="col-md-10">
+                        <input for="Password" class="form-control" />
+                        <span validation-for="Password" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <div class="checkbox">
+                            <input for="RememberMe" />
+                            <label for="RememberMe"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Log in" class="btn btn-default" />
+                    </div>
+                </div>
+                <p>
+                    <a action="Register">Register</a> if you don't have a local account.
+                </p>
+            </form>
+        </section>
+    </div>
+</div>
+@section Scripts {
+    <script src="~/lib/jquery-validation/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+}

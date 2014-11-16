@@ -1,0 +1,20 @@
+﻿@using System.Security.Principal
+
+@if (User.Identity.IsAuthenticated)
+{
+    <form method="post" controller="Account" action="LogOff" id="logoutForm" class="navbar-right">
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a controller="Account" action="Manage" title="Manage">Hello @User.Identity.GetUserName()!</a>
+            </li>
+            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+        </ul>
+    </form>
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li><a id="registerLink" controller="Account" action="Register">Register</a></li>
+        <li><a id="loginLink" controller="Account" action="Login">Log in</a></li>
+    </ul>
+}
