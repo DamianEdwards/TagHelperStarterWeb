@@ -2,10 +2,10 @@
 
 @if (User.Identity.IsAuthenticated)
 {
-    <form method="post" controller="Account" action="LogOff" id="logoutForm" class="navbar-right">
+    <form asp-controller="Account" asp-action="LogOff" method="post" id="logoutForm" class="navbar-right">
         <ul class="nav navbar-nav navbar-right">
             <li>
-                <a controller="Account" action="Manage" title="Manage">Hello @User.Identity.GetUserName()!</a>
+                <a asp-controller="Account" asp-action="Manage" title="Manage">Hello @User.Identity.GetUserName()!</a>
             </li>
             <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
         </ul>
@@ -14,7 +14,7 @@
 else
 {
     <ul class="nav navbar-nav navbar-right">
-        <li><a id="registerLink" controller="Account" action="Register">Register</a></li>
-        <li><a id="loginLink" controller="Account" action="Login">Log in</a></li>
+        <li><a id="registerLink" asp-controller="Account" asp-action="Register">Register</a></li>
+        <li><a id="loginLink" asp-controller="Account" asp-action="Login">Log in</a></li>
     </ul>
 }
