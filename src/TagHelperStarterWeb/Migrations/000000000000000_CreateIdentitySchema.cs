@@ -1,10 +1,9 @@
 ﻿using System;
 using Microsoft.Data.Entity;
 using Microsoft.Data.Entity.Metadata;
-using Microsoft.Data.Entity.Migrations;
-using Microsoft.Data.Entity.Migrations.Builders;
-using Microsoft.Data.Entity.Migrations.Infrastructure;
-using TagHelperStarterWeb.Models;
+using Microsoft.Data.Entity.Relational.Migrations;
+using Microsoft.Data.Entity.Relational.Migrations.Builders;
+using Microsoft.Data.Entity.Relational.Migrations.Infrastructure;
 
 namespace TagHelperStarterWeb.Migrations
 {
@@ -26,7 +25,7 @@ namespace TagHelperStarterWeb.Migrations
                         Id = c.Int(nullable: false, identity: true),
                         ClaimType = c.String(),
                         ClaimValue = c.String(),
-                        RoleId = c.String(dataType: "nvarchar(128)")
+                        RoleId = c.String()
                     })
                 .PrimaryKey("PK_AspNetRoleClaims", t => t.Id);
             
@@ -36,7 +35,7 @@ namespace TagHelperStarterWeb.Migrations
                         Id = c.Int(nullable: false, identity: true),
                         ClaimType = c.String(),
                         ClaimValue = c.String(),
-                        UserId = c.String(dataType: "nvarchar(128)")
+                        UserId = c.String()
                     })
                 .PrimaryKey("PK_AspNetUserClaims", t => t.Id);
             
@@ -46,7 +45,7 @@ namespace TagHelperStarterWeb.Migrations
                         LoginProvider = c.String(),
                         ProviderKey = c.String(),
                         ProviderDisplayName = c.String(),
-                        UserId = c.String(dataType: "nvarchar(128)")
+                        UserId = c.String()
                     })
                 .PrimaryKey("PK_AspNetUserLogins", t => new { t.LoginProvider, t.ProviderKey });
             
@@ -63,10 +62,12 @@ namespace TagHelperStarterWeb.Migrations
                     {
                         Id = c.String(),
                         AccessFailedCount = c.Int(nullable: false),
+                        ConcurrencyStamp = c.String(),
                         Email = c.String(),
                         EmailConfirmed = c.Boolean(nullable: false),
                         LockoutEnabled = c.Boolean(nullable: false),
-                        LockoutEnd = c.DateTimeOffset(nullable: false),
+                        LockoutEnd = c.DateTimeOffset(),
+                        NormalizedEmail = c.String(),
                         NormalizedUserName = c.String(),
                         PasswordHash = c.String(),
                         PhoneNumber = c.String(),
@@ -77,11 +78,28 @@ namespace TagHelperStarterWeb.Migrations
                     })
                 .PrimaryKey("PK_AspNetUsers", t => t.Id);
             
-            migrationBuilder.AddForeignKey("AspNetRoleClaims", "FK_AspNetRoleClaims_AspNetRoles_RoleId", new[] { "RoleId" }, "AspNetRoles", new[] { "Id" }, cascadeDelete: false);
+            migrationBuilder.AddForeignKey(
+                "AspNetRoleClaims",
+                "FK_AspNetRoleClaims_AspNetRoles_RoleId",
+                 new[] { "RoleId" },
+                 "AspNetRoles",
+                 new[] { "Id" },
+                 cascadeDelete: false);
             
-            migrationBuilder.AddForeignKey("AspNetUserClaims", "FK_AspNetUserClaims_AspNetUsers_UserId", new[] { "UserId" }, "AspNetUsers", new[] { "Id" }, cascadeDelete: false);
+            migrationBuilder.AddForeignKey(
+                "AspNetUserClaims",
+                "FK_AspNetUserClaims_AspNetUsers_UserId",
+                 new[] { "UserId" }, "AspNetUsers",
+                 new[] { "Id" },
+                 cascadeDelete: false);
             
-            migrationBuilder.AddForeignKey("AspNetUserLogins", "FK_AspNetUserLogins_AspNetUsers_UserId", new[] { "UserId" }, "AspNetUsers", new[] { "Id" }, cascadeDelete: false);
+            migrationBuilder.AddForeignKey(
+                "AspNetUserLogins",
+                "FK_AspNetUserLogins_AspNetUsers_UserId",
+                 new[] { "UserId" },
+                 "AspNetUsers",
+                 new[] { "Id" },
+                 cascadeDelete: false);
         }
         
         public override void Down(MigrationBuilder migrationBuilder)
@@ -106,7 +124,7 @@ namespace TagHelperStarterWeb.Migrations
         }
     }
 
-    [ContextType(typeof(ApplicationDbContext))]
+    [ContextType(typeof(Models.ApplicationDbContext))]
     public partial class CreateIdentitySchema : IMigrationMetadata
     {
         string IMigrationMetadata.MigrationId
@@ -121,7 +139,7 @@ namespace TagHelperStarterWeb.Migrations
         {
             get
             {
-                return "7.0.0-beta1";
+                return "7.0.0-beta2";
             }
         }
 
@@ -182,11 +200,13 @@ namespace TagHelperStarterWeb.Migrations
                 builder.Entity("TagHelperStarterWeb.Models.ApplicationUser", b =>
                 {
                     b.Property<int>("AccessFailedCount");
+                    b.Property<string>("ConcurrencyStamp");
                     b.Property<string>("Email");
                     b.Property<bool>("EmailConfirmed");
                     b.Property<string>("Id");
                     b.Property<bool>("LockoutEnabled");
-                    b.Property<DateTimeOffset>("LockoutEnd");
+                    b.Property<DateTimeOffset?>("LockoutEnd");
+                    b.Property<string>("NormalizedEmail");
                     b.Property<string>("NormalizedUserName");
                     b.Property<string>("PasswordHash");
                     b.Property<string>("PhoneNumber");

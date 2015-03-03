@@ -1,12 +1,12 @@
 ﻿using System;
 using Microsoft.Data.Entity;
 using Microsoft.Data.Entity.Metadata;
-using Microsoft.Data.Entity.Migrations.Infrastructure;
+using Microsoft.Data.Entity.Relational.Migrations.Infrastructure;
 using TagHelperStarterWeb.Models;
 
 namespace TagHelperStarterWeb.Migrations
 {
-    [ContextType(typeof(ApplicationDbContext))]
+    [ContextType(typeof(TagHelperStarterWeb.Models.ApplicationDbContext))]
     public class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
         public override IModel Model
@@ -66,11 +66,13 @@ namespace TagHelperStarterWeb.Migrations
                 builder.Entity("TagHelperStarterWeb.Models.ApplicationUser", b =>
                 {
                     b.Property<int>("AccessFailedCount");
+                    b.Property<string>("ConcurrencyStamp");
                     b.Property<string>("Email");
                     b.Property<bool>("EmailConfirmed");
                     b.Property<string>("Id");
                     b.Property<bool>("LockoutEnabled");
-                    b.Property<DateTimeOffset>("LockoutEnd");
+                    b.Property<DateTimeOffset?>("LockoutEnd");
+                    b.Property<string>("NormalizedEmail-");
                     b.Property<string>("NormalizedUserName");
                     b.Property<string>("PasswordHash");
                     b.Property<string>("PhoneNumber");

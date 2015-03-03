@@ -24,7 +24,7 @@ namespace TagHelperStarterWeb.Models
             // are supported in ASP.NET 5
             if (!_created)
             {
-                Database.AsRelational().AsMigrationsEnabled().EnsureCreated();
+                Database.AsMigrationsEnabled().ApplyMigrations();
                 _created = true;
             }
         }
