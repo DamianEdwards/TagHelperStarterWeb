@@ -34,13 +34,13 @@ namespace TagHelperStarterWeb
             // Add EF services to the services container.
             services.AddEntityFramework(Configuration)
                 .AddSqlServer()
-                .AddDbContext<ApplicationDbContext>();
+                .AddDbContext<ApplicationDbContext>(options =>
+                    options.UseSqlServer(Configuration.Get("Data:DefaultConnection:ConnectionString")));
 
             // Add Identity services to the services container.
-            services.AddIdentity<ApplicationUser, IdentityRole>(Configuration)
-                    .AddEntityFrameworkStores<ApplicationDbContext>()
-                    .AddDefaultTokenProviders();
-            
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>();
+
             // Add MVC services to the services container.
             services.AddMvc();
 
@@ -60,7 +60,7 @@ namespace TagHelperStarterWeb
             // Add the following to the request pipeline only in development environment.
             if (string.Equals(env.EnvironmentName, "Development", StringComparison.OrdinalIgnoreCase))
             {
-                app.UseBrowserLink();
+                //app.UseBrowserLink();
                 app.UseErrorPage(ErrorPageOptions.ShowAll);
                 app.UseDatabaseErrorPage(DatabaseErrorPageOptions.ShowAll);
             }

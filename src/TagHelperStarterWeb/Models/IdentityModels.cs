@@ -24,12 +24,12 @@ namespace TagHelperStarterWeb.Models
             // are supported in ASP.NET 5
             if (!_created)
             {
-                Database.AsMigrationsEnabled().ApplyMigrations();
+                Database.AsRelational().ApplyMigrations();
                 _created = true;
             }
         }
 
-        protected override void OnConfiguring(DbContextOptions options)
+        protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
             options.UseSqlServer();
         }

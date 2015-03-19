@@ -1,4 +1,6 @@
 ﻿@model TagHelperStarterWeb.Models.RegisterViewModel
+@tagHelperPrefix "th:"
+@addTagHelper "*, Microsoft.AspNet.Mvc.TagHelpers"
 
 @{
     ViewBag.Title = "Register";
@@ -6,29 +8,29 @@
 
 <h2>@ViewBag.Title.</h2>
 
-<form asp-controller="Account" asp-action="Register" method="post" class="form-horizontal" role="form">
+<th:form asp-controller="Account" asp-action="Register" method="post" class="form-horizontal" role="form">
     <h4>Create a new account.</h4>
     <hr />
-    <div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>
+    <th:div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></th:div>
     <div class="form-group">
-        <label asp-for="UserName" class="col-md-2 control-label"></label>
+        <th:label asp-for="UserName" class="col-md-2 control-label"></th:label>
         <div class="col-md-10">
-            <input asp-for="UserName" class="form-control" />
-            <span asp-validation-for="UserName" class="text-danger"></span>
+            <th:input asp-for="UserName" class="form-control" />
+            <th:span asp-validation-for="UserName" class="text-danger"></th:span>
         </div>
     </div>
     <div class="form-group">
-        <label asp-for="Password" class="col-md-2 control-label"></label>
+        <th:label asp-for="Password" class="col-md-2 control-label"></th:label>
         <div class="col-md-10">
-            <input asp-for="Password" class="form-control" />
-            <span asp-validation-for="Password" class="text-danger"></span>
+            <th:input asp-for="Password" class="form-control" />
+            <th:span asp-validation-for="Password" class="text-danger"></th:span>
         </div>
     </div>
     <div class="form-group">
-        <label asp-for="ConfirmPassword" class="col-md-2 control-label"></label>
+        <th:label asp-for="ConfirmPassword" class="col-md-2 control-label"></th:label>
         <div class="col-md-10">
-            <input asp-for="ConfirmPassword" class="form-control" />
-            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            <th:input asp-for="ConfirmPassword" class="form-control" />
+            <th:span asp-validation-for="ConfirmPassword" class="text-danger"></th:span>
         </div>
     </div>
     <div class="form-group">
@@ -36,9 +38,8 @@
             <input type="submit" class="btn btn-default" value="Register" />
         </div>
     </div>
-</form>
+</th:form>
 
 @section Scripts {
-    <script src="~/lib/jquery-validation/jquery.validate.js"></script>
-    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
 }

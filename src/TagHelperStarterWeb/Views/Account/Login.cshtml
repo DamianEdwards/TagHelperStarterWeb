@@ -1,4 +1,6 @@
 ﻿@model TagHelperStarterWeb.Models.LoginViewModel
+@tagHelperPrefix "th:"
+@addTagHelper "*, Microsoft.AspNet.Mvc.TagHelpers"
 
 @{
     ViewBag.Title = "Log in";
@@ -8,45 +10,45 @@
 <div class="row">
     <div class="col-md-8">
         <section id="loginForm">
-            <form asp-controller="Account" asp-action="Login" asp-route-returnurl="@ViewBag.ReturnUrl" method="post" class="form-horizontal" role="form">
+            <th:form asp-controller="Account" asp-action="Login" asp-route-returnurl="@ViewBag.ReturnUrl" method="post" class="form-horizontal" role="form">
                 <h4>Use a local account to log in.</h4>
                 <hr />
-                <div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>
+                <th:div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></th:div>
                 <div class="form-group">
-                    <label asp-for="UserName" class="col-md-2 control-label"></label>
+                    <th:label asp-for="UserName" class="col-md-2 control-label"></th:label>
                     <div class="col-md-10">
-                        <input asp-for="UserName" class="form-control" />
-                        <span asp-validation-for="UserName" class="text-danger"></span>
+                        <th:input asp-for="UserName" class="form-control" />
+                        <th:span asp-validation-for="UserName" class="text-danger"></th:span>
                     </div>
                 </div>
+                
                 <div class="form-group">
-                    <label asp-for="Password" class="col-md-2 control-label"></label>
+                    <th:label asp-for="Password" class="col-md-2 control-label"></th:label>
                     <div class="col-md-10">
-                        <input asp-for="Password" class="form-control" />
-                        <span asp-validation-for="Password" class="text-danger"></span>
+                        <th:input asp-for="Password" class="form-control" />
+                        <th:span asp-validation-for="Password" class="text-danger"></th:span>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
                         <div class="checkbox">
-                            <input asp-for="RememberMe" />
-                            <label asp-for="RememberMe"></label>
+                            <th:input asp-for="RememberMe" />
+                            <th:label asp-for="RememberMe"></th:label>
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Log in" class="btn btn-default" />
+                        <th:input type="submit" value="Log in" class="btn btn-default" />
                     </div>
                 </div>
                 <p>
-                    <a asp-action="Register">Register</a> if you don't have a local account.
+                    <th:a asp-action="Register">Register</th:a> if you don't have a local account.
                 </p>
-            </form>
+            </th:form>
         </section>
     </div>
 </div>
 @section Scripts {
-    <script src="~/lib/jquery-validation/jquery.validate.js"></script>
-    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
 }

@@ -10,26 +10,26 @@
         "bootstrap-touch-carousel": "0.8.0"
     },
     "exportsOverride": {
-    "bootstrap": {
-      "js": "dist/js/*.*",
-      "css": "dist/css/*.*",
-      "fonts": "dist/fonts/*.*"
-    },
-    "bootstrap-touch-carousel": {
-      "js": "dist/js/*.*",
-      "css": "dist/css/*.*"
+        "bootstrap": {
+            "js": "dist/js/*.*",
+            "css": "dist/css/*.*",
+            "fonts": "dist/fonts/*.*"
         },
-     "jquery": {
-      "": "jquery.{js,min.js,min.map}"
+        "bootstrap-touch-carousel": {
+            "js": "dist/js/*.*",
+            "css": "dist/css/*.*"
+        },
+        "jquery": {
+            "": "jquery.{js,min.js,min.map}"
         },
         "jquery-validation": {
             "": "jquery.validate.js"
         },
-    "jquery-validation-unobtrusive": {
-      "": "jquery.validate.unobtrusive.{js,min.js}"
-    },
-    "hammer": {
-      "": "hammer.{js,min.js}"
+        "jquery-validation-unobtrusive": {
+            "": "jquery.validate.unobtrusive.{js,min.js}"
+        },
+        "hammer": {
+            "": "hammer.{js,min.js}"
         }
     }
 }

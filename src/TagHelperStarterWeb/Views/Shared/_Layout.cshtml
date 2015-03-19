@@ -1,13 +1,28 @@
-﻿<!DOCTYPE html>
+﻿@tagHelperPrefix "th:"
+@addTagHelper "*, Microsoft.AspNet.Mvc.TagHelpers"
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewBag.Title - My ASP.NET Application</title>
 
-    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
-    <link rel="stylesheet" href="~/lib/bootstrap-touch-carousel/css/bootstrap-touch-carousel.css" />
+    <th:environment names="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/lib/bootstrap-touch-carousel/css/bootstrap-touch-carousel.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+    </th:environment>
+    <th:environment names="Staging,Production">
+        <th:link rel="stylesheet" href="//cdn.jsdelivr.net/bootstrap/3.0.0/css/bootstrap.min.css"
+                 asp-fallback-href="~/lib/bootstrap/css/bootstrap.min.css"
+                 asp-fallback-test-class="hidden"
+                 asp-fallback-test-property="visibility" asp-fallback-test-value="hidden" />
+        <link rel="stylesheet" href="~/lib/bootstrap-touch-carousel/css/bootstrap-touch-carousel.css" />
+        <th:link rel="stylesheet" href="~/css/site.min.css"
+            asp-fallback-href="~/css/site.css" asp-fallback-test-class="fallback-test"
+            asp-fallback-test-property="visibility" asp-fallback-test-value="hidden" />
+    </th:environment>
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -22,9 +37,9 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-controller="Home" asp-action="Contact">Contact</a></li>
+                    <li><th:a asp-controller="Home" asp-action="Index">Home</th:a></li>
+                    <li><th:a asp-controller="Home" asp-action="About">About</th:a></li>
+                    <li><th:a asp-controller="Home" asp-action="Contact">Contact</th:a></li>
                 </ul>
                 @await Html.PartialAsync("_LoginPartial")
             </div>
@@ -34,13 +49,28 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; 2015 - My ASP.NET Application</p>
         </footer>
     </div>
-    <script src="~/lib/jquery/js/jquery.js"></script>
-    <script src="~/lib/bootstrap/js/bootstrap.js"></script>
-    <script src="~/lib/hammer.js/hammer.js"></script>
+
+    <th:environment names="Development">
+        <script src="~/lib/jquery/js/jquery.js"></script>
+        <script src="~/lib/bootstrap/js/bootstrap.js"></script>
+        <script src="~/lib/hammer.js/hammer.js"></script>
+    </th:environment>
+    <th:environment names="Staging,Production">
+        <th:script src="//cdn.jsdelivr.net/jquery/1.10.2/jquery.min.js"
+                   asp-fallback-src="~/lib/jquery/js/jquery.min.js"
+                   asp-fallback-test="window.jQuery"></th:script>
+        <th:script src="//cdn.jsdelivr.net/bootstrap/3.0.0/js/bootstrap.min.js"
+                   asp-fallback-src="~/lib/bootstrap/js/bootstrap.min.js"
+                   asp-fallback-test="window.jQuery"></th:script>
+        <th:script src="//cdn.jsdelivr.net/hammerjs/2.0.4/hammer.min.js"
+                   asp-fallback-src="~/lib/hammer.js/hammer.js"></th:script>
+    </th:environment>
+    
     <script src="~/lib/bootstrap-touch-carousel/js/bootstrap-touch-carousel.js"></script>
+    
     @RenderSection("scripts", required: false)
 </body>
 </html>

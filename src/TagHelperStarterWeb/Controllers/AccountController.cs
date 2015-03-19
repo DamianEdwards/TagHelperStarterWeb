@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Principal;
 using System.Threading.Tasks;
+using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Mvc;
 using TagHelperStarterWeb.Models;
@@ -148,7 +149,7 @@ namespace TagHelperStarterWeb.Controllers
 
         private async Task<ApplicationUser> GetCurrentUserAsync()
         {
-            return await UserManager.FindByIdAsync(Context.User.Identity.GetUserId());
+            return await UserManager.FindByIdAsync(Context.User.GetUserId());
         }
 
         public enum ManageMessageId

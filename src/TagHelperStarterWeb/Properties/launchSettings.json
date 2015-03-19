@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "IIS Express": {
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNET_ENV": "Staging"
+      }
+    }
+  }
+}

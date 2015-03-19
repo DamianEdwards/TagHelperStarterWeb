@@ -1,0 +1,15 @@
+﻿@tagHelperPrefix "th:"
+@addTagHelper "*, Microsoft.AspNet.Mvc.TagHelpers"
+
+<th:environment names="Development">
+    <script src="~/lib/jquery-validation/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+</th:environment>
+<th:environment names="Staging,Production">
+    <th:script src="//cdn.jsdelivr.net/jquery.validation/1.11.1/jquery.validate.min.js"
+               asp-fallback-src="~/lib/jquery-validation/jquery.validate.js"
+               asp-fallback-test="window.jquery && window.jquery.validator"></th:script>
+    <th:script src="//ajax.aspnetcdn.com/ajax/mvc/5.2.3/jquery.validate.unobtrusive.min.js"
+               asp-fallback-src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"
+               asp-fallback-test="window.jquery && window.jquery.validator && window.jquery.validator.unobtrusive"></th:script>
+</th:environment>
