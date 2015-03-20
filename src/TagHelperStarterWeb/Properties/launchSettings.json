@@ -3,7 +3,7 @@
     "IIS Express": {
       "launchBrowser": true,
       "environmentVariables": {
-        "ASPNET_ENV": "Staging"
+        "ASPNET_ENV": "Development"
       }
     }
   }
