@@ -29,11 +29,6 @@ namespace TagHelperStarterWeb.Models
             }
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder options)
-        {
-            options.UseSqlServer();
-        }
-
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

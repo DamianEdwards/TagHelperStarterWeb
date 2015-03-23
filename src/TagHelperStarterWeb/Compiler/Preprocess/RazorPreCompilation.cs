@@ -3,11 +3,11 @@ using Microsoft.AspNet.Mvc;
 
 namespace TagHelperStarterWeb.Compiler.Preprocess
 {
-    // TODO: Razor pre-compilation doesn't work with Tag Helpers in beta4
-    //public class RazorPreCompilation : RazorPreCompileModule
-    //{
-    //    public RazorPreCompilation(IServiceProvider provider) : base(provider)
-    //    {
-    //    }
-    //}
+    public class RazorPreCompilation : RazorPreCompileModule
+    {
+        public RazorPreCompilation(IServiceProvider provider) : base(provider)
+        {
+
+        }
+    }
 }
