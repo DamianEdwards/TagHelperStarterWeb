@@ -43,9 +43,9 @@
         "**.kproj",
         "**.user",
         "**.vspscc"
-    ]
-    /*"scripts": {
-        "postrestore": [ "npm install" ],
-        "prepare": [ "grunt bower:install" ]
-    }*/
+    ],
+    "scripts": {
+        "postrestore": [ "npm install", "bower install" ],
+        "prepare": [ "gulp copy" ]
+    }
 }
