@@ -3,6 +3,8 @@
 var gulp = require("gulp"),
     fs = require("fs"),
     del = require("del"),
+    watch = require("gulp-watch"),
+    batch = require("gulp-batch"),
     plumber = require("gulp-plumber"),
     rename = require("gulp-rename"),
     jshint = require("gulp-jshint"),
@@ -84,16 +86,30 @@ gulp.task("less", function () {
 });
 
 gulp.task("watch", ["copy:lib", "jshint", "less"], function () {
-    var onChange = function (event) {
-        console.log("File " + event.path + " was " + event.type + ", running tasks...");
+    var onChange = function (file) {
+        console.log(file.event + " of " + file.path + " detected, running tasks...");
     };
 
-    gulp.watch([paths.js, "!" + paths.minJs], ["jshint"])
-        .on("change", onChange);
-    gulp.watch([paths.less], ["less"])
-        .on("change", onChange);
-    gulp.watch(paths.bower + "*", ["copy:lib"])
-        .on("change", onChange);
+	// watch([paths.js, "!" + paths.minJs], function (file) {
+	// 	onChange(file);
+	// 	gulp.start("jshint");
+	// });
+	// watch([paths.less], function (file) {
+	// 	onChange(file);
+	// 	gulp.start("less");
+	// });
+	watch(paths.bower, batch({ timeout: 100 }, function (events, cb) {
+		//onChange(file);
+		//gulp.start("copy:lib");
+		//cb();
+		events
+			.on("data", onChange)
+			.on("end", function() {
+				gulp.start("copy:lib");
+				cb();
+			});
+    }));
+
 });
 
 //gulp.task("images", function () {

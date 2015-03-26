@@ -8,5 +8,6 @@
     "jquery-validation-unobtrusive": "3.2.2",
     "hammer.js": "2.0.4",
     "bootstrap-touch-carousel": "0.8.0"
-  }
+  },
+  "devDependencies": {}
 }
