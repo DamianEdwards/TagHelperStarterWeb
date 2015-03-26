@@ -1,8 +1,9 @@
-﻿/// <binding Clean='clean' />
+/// <binding Clean='clean' ProjectOpened='watch' />
 
 var gulp = require("gulp"),
     fs = require("fs"),
     del = require("del"),
+    runSequence = require("run-sequence"),
     watch = require("gulp-watch"),
     batch = require("gulp-batch"),
     plumber = require("gulp-plumber"),
@@ -73,7 +74,7 @@ gulp.task("jsmin", function () {
 });
 
 gulp.task("cssmin", function () {
-    return gulp.src([paths.css, "!" + paths.minCss], { base: "." })
+    gulp.src([paths.css, "!" + paths.minCss], { base: "." })
         .pipe(cssmin())
         .pipe(rename({ suffix: ".min" }))
         .pipe(gulp.dest("."));
@@ -89,27 +90,25 @@ gulp.task("watch", ["copy:lib", "jshint", "less"], function () {
     var onChange = function (file) {
         console.log(file.event + " of " + file.path + " detected, running tasks...");
     };
-
-	// watch([paths.js, "!" + paths.minJs], function (file) {
-	// 	onChange(file);
-	// 	gulp.start("jshint");
-	// });
-	// watch([paths.less], function (file) {
-	// 	onChange(file);
-	// 	gulp.start("less");
-	// });
-	watch(paths.bower, batch({ timeout: 100 }, function (events, cb) {
-		//onChange(file);
-		//gulp.start("copy:lib");
-		//cb();
-		events
-			.on("data", onChange)
-			.on("end", function() {
-				gulp.start("copy:lib");
-				cb();
-			});
+    // TODO: Use gulp-plumber to deal with errors
+    watch([paths.js, "!" + paths.minJs], batch(function (events, cb) {
+        events.on("data", onChange)
+            .on("end", function () {
+                runSequence("jshint", cb);
+            });
     }));
-
+    watch([paths.less], batch(function (events, cb) {
+        events.on("data", onChange)
+            .on("end", function () {
+                runSequence("less", cb);
+            });
+    }));
+    watch(paths.bower, batch(function (events, cb) {
+        events.on("data", onChange)
+            .on("end", function () {
+                runSequence("copy:lib", cb);
+            });
+    }));
 });
 
 //gulp.task("images", function () {
@@ -120,4 +119,6 @@ gulp.task("watch", ["copy:lib", "jshint", "less"], function () {
 //        .pipe(gulp.dest("."));
 //});
 
-gulp.task("pre-publish", ["clean", "copy", "less", "cssmin", "jsmin"]);
+gulp.task("pre-publish", function () {
+    runSequence(["clean:js", "clean:css"], "copy:lib", "less", ["cssmin", "jsmin"]);
+});
