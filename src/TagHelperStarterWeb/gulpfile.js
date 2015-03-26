@@ -1,4 +1,4 @@
-/// <binding Clean='clean' ProjectOpened='watch' />
+/// <binding Clean='clean' />
 
 var gulp = require("gulp"),
     fs = require("fs"),
