@@ -5,6 +5,7 @@ using Microsoft.AspNet.Diagnostics.Entity;
 using Microsoft.AspNet.Hosting;
 using Microsoft.AspNet.Http;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Routing;
 using Microsoft.AspNet.Security.Cookies;
 using Microsoft.Data.Entity;
